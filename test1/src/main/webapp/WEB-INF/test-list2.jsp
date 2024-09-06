@@ -58,7 +58,7 @@
 				var nparmap = {
 				};
 				$.ajax({
-					url:"",
+					url:"testList.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
