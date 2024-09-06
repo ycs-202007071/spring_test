@@ -20,34 +20,53 @@ public class TestServiceImpl implements TestService{
 	public HashMap<String, Object> searchProdectNo(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		Test test = testMapper.testList(map);
-		resultMap.put("list", test);
-		System.out.println("service" + test);
+		resultMap.put("test", test);
 		return resultMap;
 	}
 
 	@Override
 	public HashMap<String, Object> testDrop(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
-		testMapper.testDelete(map);
 		try {
-			resultMap.put("massage", "삭제됨");
+			testMapper.testDelete(map);
+			resultMap.put("message", "삭제됨");
 		} catch (Exception e) {
-			resultMap.put("massage", "오류");
+			resultMap.put("message", "오류");
 		}
 		return resultMap;
 	}
 
 	@Override
 	public HashMap<String, Object> testAdd(HashMap<String, Object> map) {
-		System.out.println("insert" + map);
 		HashMap<String, Object> resultMap = new HashMap<>();
-		testMapper.testInsert(map);
+		System.out.println("insert" + map);
 		try {
-			resultMap.put("massage", "등록됨");
+			testMapper.testInsert(map);
+			resultMap.put("message", "등록됨");
 		} catch (Exception e) {
-			resultMap.put("massage", "오류");
+			resultMap.put("message", "오류");
 		}
 		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> testPlus(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		try {
+			testMapper.testUpdate(map);
+			resultMap.put("message", "수정됨");
+		} catch (Exception e) {
+			resultMap.put("message", "오류");
+		}
+		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> searchList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		List<Test> list = testMapper.testGetList(map);
+		resultMap.put("list", list);
+		return null;
 	}
 
 	

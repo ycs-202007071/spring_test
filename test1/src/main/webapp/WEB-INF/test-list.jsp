@@ -13,11 +13,17 @@
 	<div id="app">
 		<input type="text" placeholder="1~15입력(pk값)" v-model =productNo>
 		<button @click = "fnGetList">검색</button>
-		<div>{{list.productNo}}</div>
-		<div>{{list.productName}}</div>
-		<div>{{list.productPrice}}</div>
-		<button @click="fnUpdate">수정</button>
-		<button @click="fnDelect">삭제</button>
+		<template v-if="isView"> 
+			<div>{{info.productNo}}</div>
+			<div>{{info.productName}}</div>
+			<div v-if ="isEditing">
+				<input type="text" v-model="productPrice"> 
+				<button @click="fnUpdate">저장</button>
+			</div>
+			<div v-else>{{info.productPrice}}</div>
+			<button @click="saveChanges">수정</button>
+			<button @click="fnDelect">삭제</button>
+		</template>
 	</div>
 </body>
 </html>
@@ -26,9 +32,11 @@
         data() {
             return {
 				productNo : "",
-				list : [],
+				info : [],
 				data : [],
-				productPrice : ""
+				productPrice : "",
+				isEditing : false,
+				isView : false
             };
         },
         methods: {
@@ -44,11 +52,15 @@
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
-						console.log(data);
-						
+						console.log(data.test);
+						self.info = data.test;
+						self.isView = true;
 					}
 				});
             },
+			saveChanges() {
+			  this.isEditing = true; // 제품 가격 업데이트
+		  },
 			fnDelect(){
 				var self = this;
 				var nparmap = {
@@ -60,8 +72,10 @@
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
-						console.log(data);
 						alert(data.message);
+						console.log("test=>", data.message);
+						self.isView = false;
+						
 						
 						
 					}
@@ -71,16 +85,18 @@
 				var self = this;
 				var nparmap = {
 					productNo : this.productNo,
-					product : productPrice
+					productPrice : this.productPrice
 				};
 				$.ajax({
-					url:"delect.dox",
+					url:"update.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
-						console.log(data);
 						alert(data.message);
+						console.log(data);
+						self.isEditing = false;
+						self.fnGetList();
 					}
 				});
             }

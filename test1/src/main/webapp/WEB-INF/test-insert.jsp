@@ -8,7 +8,7 @@
 	<title>테스트 샘플 파일</title>
 </head>
 <style>
-</style>
+</sty10le>
 <body>
 	<div id="app">
 		제품명 : <input type="text" v-model = "productName"><br>
@@ -33,11 +33,12 @@
                     productPrice : this.productPrice
                 };
 				$.ajax({
-					url:"test.dox",
+					url:"insert.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
+						
 						console.log(data);
 						
 					}

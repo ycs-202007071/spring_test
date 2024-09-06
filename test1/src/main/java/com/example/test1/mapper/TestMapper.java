@@ -12,4 +12,6 @@ public interface TestMapper {
 	Test testList(HashMap<String, Object> map);
 	void testDelete(HashMap<String, Object> map);
 	void testInsert(HashMap<String, Object> map);
+	void testUpdate(HashMap<String, Object> map);
+	List<Test> testGetList(HashMap<String, Object> map);
 }

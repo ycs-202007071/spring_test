@@ -15,10 +15,16 @@
 	
 	<insert id="testInsert" parameterType="hashmap">
 		INSERT INTO TEST_PRODUCT
-		VALUES (15, #{prodectName}, #{prodectPrice})
+		VALUES (PRODUCT_SEQ.NEXTVAL, #{productName}, #{productPrice})
 	</insert>
 	
 	<update id="testUpdate" parameterType="hashmap">
+		UPDATE TEST_PRODUCT SET PRODUCT_PRICE = #{productPrice}
+		WHERE PRODUCT_NO = #{productNo}
 	</update>
+	
+	<select id="testGetList" parameterType="hashmap" resultType="com.example.test1.model.Test">
+		SELECT * FROM TEST_PRODUCT
+	</select>
 	
 </mapper>
