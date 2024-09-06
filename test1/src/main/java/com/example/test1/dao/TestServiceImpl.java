@@ -65,8 +65,9 @@ public class TestServiceImpl implements TestService{
 	public HashMap<String, Object> searchList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		List<Test> list = testMapper.testGetList(map);
+		System.out.println(list);
 		resultMap.put("list", list);
-		return null;
+		return resultMap;
 	}
 
 	

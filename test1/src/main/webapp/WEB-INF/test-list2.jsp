@@ -48,9 +48,9 @@
 					type : "POST", 
 					data : nparmap,
 					success : function(data) {
-						self.list = data.test;
+						self.list = data.list;
 						console.log(data);
-					};	
+					}	
 				});
             },
             fnSearch(){
@@ -58,7 +58,7 @@
 				var nparmap = {
 				};
 				$.ajax({
-					url:"testList.dox",
+					url:"",
 					dataType:"json",	
 					type : "POST", 
 					data : nparmap,
